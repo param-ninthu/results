@@ -14,13 +14,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Results {
 
     @Id
-    private ObjectId id;
+    private ObjectId _id;
     private String studentNo;
     private String indexNo;
     private String course;
     private String nic;
     private String fullName;
     private String result;
+
+
+    public ObjectId get_id() {
+        return _id;
+    }
+
 
 
     public void setStudentNo(String studentNo) {
@@ -62,4 +68,9 @@ public class Results {
     public String getNic() {
         return nic;
     }
+
+    public String getStudentNo() {
+        return studentNo;
+    }
+
 }

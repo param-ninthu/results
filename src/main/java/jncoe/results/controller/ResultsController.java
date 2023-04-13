@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -17,13 +19,21 @@ public class ResultsController {
     private ResultsService resultsService;
 
     @PostMapping
-    public ResponseEntity<Results> getResultByIndexNo(@RequestBody String indexNo){
-       Optional<Results> results = resultsService.getResult(indexNo);
-       if(results.isPresent()){
-           Results displayResults = results.get();
-           return new ResponseEntity<>(displayResults,HttpStatus.OK);
-       }else {
-           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-       }
+    public Optional<Results> getResult(@RequestBody String indexNo) {
+        return resultsService.getResultByIndexNo(indexNo);
     }
+
+
+    @GetMapping("/{indexNo}")
+    public ResponseEntity<?> getResultByGet(@PathVariable String indexNo) {
+        Optional<Results> result = resultsService.getResultByIndexNo(indexNo);
+        if(result.isPresent()) {
+            return new ResponseEntity<Results>(result.get(), HttpStatus.OK);
+        } else {
+            Map<String, String> errorMap = new HashMap<>();
+            errorMap.put("message", "No Index");
+            return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-public interface ResultRepository extends MongoRepository<Results, ObjectId> {
+public interface ResultRepository extends MongoRepository<Results, String> {
     Optional<Results> findResultByIndexNo(String indexNo);
 }

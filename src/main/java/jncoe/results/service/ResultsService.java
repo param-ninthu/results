@@ -11,7 +11,7 @@ public class ResultsService {
     @Autowired
     private ResultRepository resultRepository;
 
-    public Optional<Results> getResult(String indexNo){
+    public Optional<Results> getResultByIndexNo(String indexNo){
         return resultRepository.findResultByIndexNo(indexNo);
     }
 
